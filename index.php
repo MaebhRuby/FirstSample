@@ -4,6 +4,7 @@
   <head>  <meta charset="utf-8">
     <title>Login Form</title>
       <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <link rel="stylesheet" type="text/css" href="style.css"/>
   </head>
 
 <body>
