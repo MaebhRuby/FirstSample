@@ -5,45 +5,45 @@
     <title>Login Form</title>
       <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
       <link rel="stylesheet" type="text/css" href="style.css"/>
+      <script>
+      function checkForAnswer(){
+          $.post( "ajax.php", { type: "checkstatus" })
+          .done(function( data ) {
+                   if(data == '0'){
+                     alert('no answer yet')
+                    }else {
+                       alert('got an answer!')
+                   }
+          });
+      }
+
+      function askquestion(){
+          var var1 = document.getElementById('app_name').value;
+        //  var var2 = document.getElementById('app_ques').value;
+          $.post( "ajax.php", { type: "askquestion", app_name: var1/*, app_ques: var2*/ })
+          .done(function( data ) {
+                alert('Loading')
+          });
+      }
+
+      //setInterval(function(){ checkForAnswer(); }, 3000);
+        </script>
+
   </head>
 
 <body>
-  <script>
-
-function checkForAnswer(){
-
-    $.post( "ajax.php", { type: "checkstatus" })
-    .done(function( data ) {
-             if(data == '0'){
-               alert('no answer yet')
-              }else {
-                 alert('got an answer!')
-             }
-    });
-}
-
-function askquestion(){
-
-    var var1 = document.getElementById('app_name').value;
-  //  var var2 = document.getElementById('app_ques').value;
-
-    $.post( "ajax.php", { type: "askquestion", app_name: var1/*, app_ques: var2*/ })
-    .done(function( data ) {
-          alert('Loading')
-    });
-}
-
-//setInterval(function(){ checkForAnswer(); }, 3000);
-
-  </script>
-
+<div>
+  <header>
+      <h1> Technical Questions </h1>
+    </header>
 
     Name: <input type="text" name="app_name" id="app_name"></input><br>
   <!--  Question: <input type="text" name="app_ques" id="app_ques"></input><br> -->
 
     <button onclick="askquestion();">Ask Question</button>
 
-
+  
+</div>
 </body>
 
 </html>

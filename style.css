@@ -6,11 +6,15 @@ html {
   background-size: cover;
 }
 
+div{
+    margin: auto;
+    width: 60%;
+    border: 3px solid black;
+    padding: 10px;
+}
 
-body{
-
-/*  background: #678903;*/
-/*  background-image:url("city.jpg");*/
-/*  background-repeat: no-repeat;*/
-
+h1 {
+  text-align: center;
+  font-family: monospace;
+  font-size: 48px;
 }
