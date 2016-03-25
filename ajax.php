@@ -56,6 +56,7 @@ function presentquestion(){
     $q = $DBH->prepare("INSERT INTO `test`.`iwa2016` (`name`) VALUES (:name);");
     $q->bindValue(':name',  $name);
   //  $q->bindValue(':question',  $question);
+    $last_id = $DBH->lastInsertId();
     $q->execute();
 
     //prompt("Please Enter Your Technical Question");
