@@ -5,7 +5,12 @@
     <title>Login Form</title>
       <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
       <link rel="stylesheet" type="text/css" href="style.css"/>
+
       <script>
+
+      var last_id = '<?php $last_id = ''; ?>';
+      var question = '';
+
       function checkForAnswer(){
           $.post( "ajax.php", { type: "checkstatus" })
           .done(function( data ) {
@@ -19,11 +24,16 @@
 
       function askquestion(){
           var var1 = document.getElementById('app_name').value;
-        //  var var2 = document.getElementById('app_ques').value;
-          $.post( "ajax.php", { type: "askquestion", app_name: var1/*, app_ques: var2*/ })
+
+          $.post( "ajax.php", { type: "submitquestion", app_name: var1 })
           .done(function( data ) {
                 alert('Loading')
-          });
+        });
+
+         var var2 = prompt("please enter your question");
+           alert('thank you for your question\n'+var2+'\nwe will reply ASAP');
+
+
       }
 
       //setInterval(function(){ checkForAnswer(); }, 3000);
@@ -37,12 +47,12 @@
       <h1> Technical Questions </h1>
     </header>
 
-    Name: <input type="text" name="app_name" id="app_name"></input><br>
+    <span>1. Enter Your Name:</span> <input type="text" name="app_name" id="app_name"></input><br>
   <!--  Question: <input type="text" name="app_ques" id="app_ques"></input><br> -->
 
-    <button onclick="askquestion();">Ask Question</button>
+    <button onclick="askquestion();">submit</button>
 
-  
+
 </div>
 </body>
 
