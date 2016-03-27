@@ -47,11 +47,16 @@
       <h1> Technical Questions </h1>
     </header>
 
-    <span>1. Enter Your Name:</span> <input type="text" name="app_name" id="app_name"></input><br>
+    <article>
+    <span id = "nameboxtext"></span> <input type="text" name="app_name" id="app_name"></input><br>
   <!--  Question: <input type="text" name="app_ques" id="app_ques"></input><br> -->
 
     <button onclick="askquestion();">submit</button>
-
+  </article>
+<script>
+    document.getElementById("nameboxtext").innerHTML = "1. Enter Your Name:";
+        document.getElementById("nameboxtext").style.fontSize = "x-large";
+    </script>
 
 </div>
 </body>
