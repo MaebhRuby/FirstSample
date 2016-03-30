@@ -1,5 +1,6 @@
 <?php
 
+
 // check what type of request is being made
 $type = $_POST['type'];
 
@@ -39,7 +40,7 @@ function checkQuestionStatus(){
 function presentquestion(){
     //catching the variables
     $name =  $_POST['app_name'];
-  //  $question = $_POST['app_ques'];
+    $question = $_POST['app_ques'];
 
     // database connection
       try {
@@ -52,9 +53,9 @@ function presentquestion(){
     } catch(PDOException $e) {echo $e;}
 
     // insert user name and question to database
-    $q = $DBH->prepare("INSERT INTO `test`.`iwa2016` (`name`) VALUES (:name);");
+    $q = $DBH->prepare("INSERT INTO `test`.`iwa2016` (`name`, `question`) VALUES (:name, :question);");
     $q->bindValue(':name',  $name);
-  //  $q->bindValue(':question',  $question);
+    $q->bindValue(':question',  $question);
     //  store the id of the current user
     $last_id = $DBH->lastInsertId();
     $q->execute();

@@ -9,7 +9,7 @@
       <script>
 
       var last_id = '<?php $last_id = ''; ?>';
-      var question = '';
+    //  var question = '';
 
       function checkForAnswer(){
           $.post( "ajax.php", { type: "checkstatus" })
@@ -24,14 +24,15 @@
 
       function askquestion(){
           var var1 = document.getElementById('app_name').value;
+          var var2 = document.getElementById('app_ques').value;
 
-          $.post( "ajax.php", { type: "submitquestion", app_name: var1 })
+          $.post( "ajax.php", { type: "submitquestion", app_name: var1, app_ques: var2 })
           .done(function( data ) {
                 alert('Loading')
         });
 
-         var var2 = prompt("please enter your question");
-           alert('thank you for your question\n'+var2+'\nwe will reply ASAP');
+      //   var var2 = prompt("please enter your question");
+          // alert('thank you for your question\n'+var2+'\nwe will reply ASAP');
 
 
       }
@@ -49,13 +50,15 @@
 
     <article>
     <span id = "nameboxtext"></span> <input type="text" name="app_name" id="app_name"></input><br>
-  <!--  Question: <input type="text" name="app_ques" id="app_ques"></input><br> -->
+    <span id = "questionbox"></span><input type="text" name="app_ques" id="app_ques"></input><br>
 
     <button onclick="askquestion();">submit</button>
   </article>
 <script>
     document.getElementById("nameboxtext").innerHTML = "1. Enter Your Name:";
         document.getElementById("nameboxtext").style.fontSize = "x-large";
+        document.getElementById("questionbox").innerHTML = "2. Enter Your Question:";
+            document.getElementById("questionbox").style.fontSize = "x-large";
     </script>
 
 </div>
