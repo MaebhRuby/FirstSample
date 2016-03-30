@@ -57,15 +57,22 @@ error_reporting(-1);
     </header>
 
     <article>
-    <span id = "nameboxtext"></span> <input type="text" name="app_name" id="app_name"></input><br>
-    <span id = "questionbox"></span><input type="text" name="app_ques" id="app_ques"></input><br>
-
-    <button onclick="askquestion();">submit</button>
+      <table id = "questable">
+        <tr>
+    <td><span id = "nameboxtext"></span></td><td> <input type="text" name="app_name" id="app_name"></input></td>
+  </tr>
+  <tr>
+    <td><span id = "questionbox"></span></td><td><input type="text" name="app_ques" id="app_ques"></input></td>
+  </tr>
+  <tr>
+  <td>  <button id = "button1" onclick="askquestion();">submit</button></td>
+  </tr>
+  </table>
   </article>
 <script>
     document.getElementById("nameboxtext").innerHTML = "1. Enter Your Name:";
         document.getElementById("nameboxtext").style.fontSize = "x-large";
-        document.getElementById("questionbox").innerHTML = "2. Enter Your Question:";
+        document.getElementById("questionbox").innerHTML = "2. What is your Question:";
             document.getElementById("questionbox").style.fontSize = "x-large";
     </script>
 
