@@ -12,7 +12,13 @@ error_reporting(-1);
   <head>  <meta charset="utf-8">
     <title>Login Form</title>
       <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
       <link rel="stylesheet" type="text/css" href="style.css"/>
+
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
       <script>
 
@@ -34,11 +40,12 @@ error_reporting(-1);
           var var1 = document.getElementById('app_name').value;
           var var2 = document.getElementById('app_ques').value;
 
+
           $.post( "ajax.php", { type: "submitquestion", app_name: var1, app_ques: var2 })
           .done(function( data ) {
                 alert('Loading')
         });
-
+          $( "#dialog" ).dialog();
       //   var var2 = prompt("please enter your question");
           // alert('thank you for your question\n'+var2+'\nwe will reply ASAP');
 
@@ -75,6 +82,13 @@ error_reporting(-1);
         document.getElementById("questionbox").innerHTML = "2. What is your Question:";
             document.getElementById("questionbox").style.fontSize = "x-large";
     </script>
+
+    <div id="dialog" title="Basic dialog">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+<script>
+  $( "#dialog" ).hide();
+</script>
 
 </div>
 </body>
