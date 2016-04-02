@@ -17,13 +17,13 @@ error_reporting(-1);
           <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css"/>
       <link rel="stylesheet" href="/resources/demos/style.css">
-<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script>
 //  var last_id = '<?php// $last_id = ''; ?>';
 //  var question = '';
         var currentId = 0;
 
-      function checkForAnswer(){
+    function checkForAnswer(){
 
           $.post( "ajax.php", { type: "checkstatus", id:currentId })
           .done(function( data ) {
@@ -35,7 +35,7 @@ error_reporting(-1);
           });
       }
 
-      function askquestion(){
+    function askquestion(){
 
         //Take input name + question and set in variables
           var var1 = document.getElementById('app_name').value;
@@ -48,10 +48,9 @@ error_reporting(-1);
                 alert(data)
                 currentId = data;
         });
-          $( "#dialog" ).dialog();
-      //   var var2 = prompt("please enter your question");
-          // alert('thank you for your question\n'+var2+'\nwe will reply ASAP');
-      }
+        //post the dialog of div somedialog to the screen
+          $( "#somedialog" ).dialog();
+    }
 
       //setInterval(function(){ checkForAnswer(); }, 3000);
         </script>
@@ -84,11 +83,13 @@ error_reporting(-1);
             document.getElementById("questionbox").style.fontSize = "x-large";
     </script>
 
-  <!--  <div id="dialog" title="Basic dialog">
-  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-</div>-->
+  <section id="somedialog" title="Thank you">
+    <p>Thank you for your question! :) </p>
+  </section>
+
+ <!--Hide the contents of div somedialog (it will be called on in a later function)-->
 <script>
-  $( "#dialog" ).hide();
+  $( "#somedialog" ).hide();
 </script>
 
 </div>
