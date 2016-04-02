@@ -13,20 +13,24 @@ error_reporting(-1);
   <head><meta charset="utf-8">
 
       <title>Login Form</title>
+      <!-- Links to connect and allow jquery be used in the code -->
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-          <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+          <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="style.css"/>
-      <link rel="stylesheet" href="/resources/demos/style.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script>
-//  var last_id = '<?php// $last_id = ''; ?>';
-//  var question = '';
+    <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+
         var currentId = 0;
 
     function checkForAnswer(){
 
+ //Take question id and pass it to ajax.php to be used in a function
           $.post( "ajax.php", { type: "checkstatus", id:currentId })
           .done(function( data ) {
+
+          //if '0' is returned (no answer has been issued) output this message to screen,
+          // if '0' is not returned (an answer has been supplied) output second message
                    if(data == '0'){
                      alert('no answer yet')
                     }else {
@@ -48,18 +52,18 @@ error_reporting(-1);
                 alert(data)
                 currentId = data;
         });
-        //post the dialog of div somedialog to the screen
+        //post the dialog of section somedialog to the screen
           $( "#somedialog" ).dialog();
     }
 
-      //setInterval(function(){ checkForAnswer(); }, 3000);
+    //setInterval(function(){ checkForAnswer(); }, 3000);
         </script>
 
   </head>
 
 <body>
-<div>
-  <header>
+  <div>
+    <header>
       <h1> Technical Questions </h1>
     </header>
 
@@ -88,11 +92,11 @@ error_reporting(-1);
   </section>
 
  <!--Hide the contents of div somedialog (it will be called on in a later function)-->
-<script>
-  $( "#somedialog" ).hide();
-</script>
+ <script>
+    $( "#somedialog" ).hide();
+  </script>
 
-</div>
+  </div>
 </body>
 
 </html>
