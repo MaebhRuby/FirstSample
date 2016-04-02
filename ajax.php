@@ -30,8 +30,11 @@ function checkQuestionStatus(){
         $DBH = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
     } catch(PDOException $e) {echo $e;}
 
+    $id = $_POST['id'];
 
-    $q = $DBH->prepare("select status from iwa2016 where id = 5");
+
+    $q = $DBH->prepare("select status from iwa2016 where id = :currentId");
+    $q->bindValue(':currentId',  $id);
 
     $q->execute();
 
@@ -61,10 +64,12 @@ function presentquestion(){
     $q = $DBH->prepare("INSERT INTO `test`.`iwa2016` (`name`, `question`) VALUES (:name, :question);");
     $q->bindValue(':name',  $name);
     $q->bindValue(':question',  $question);
-    //  store the id of the current user
-    $last_id = $DBH->lastInsertId();
+
+  //  $last_id = $DBH->lastInsertId();
     $q->execute();
 
+    //  store the id of the current user & print to screen
+    echo $DBH->lastInsertId();
 }
 
 
