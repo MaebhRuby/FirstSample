@@ -16,6 +16,7 @@ error_reporting(-1);
       <!-- Links to connect and allow jquery be used in the code -->
         <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
           <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
             <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -56,6 +57,24 @@ error_reporting(-1);
           $( "#somedialog" ).dialog();
     }
 
+    function getTime(){
+      //Using url generated from api website get data
+      $.get("https://api.xmltime.com/timeservice?accesskey=68k4A001h3&expires=2016-04-07T21%3A32%3A31%2B00%3A00&signature=yBK%2BHU2IBGo7opSjiXGXlEy%2Bkac%3D&version=2&out=xml&placeid=norway%2Foslo",
+      function( data ) {
+
+        //convert the xml data to a string
+        xml = new XMLSerializer().serializeToString(data.documentElement);
+        //pass to the jquery parser to allow for selections to be made
+        xmlDoc = $.parseXML( xml ),
+        //assign the parsed data to a variable
+        $xml = $( xmlDoc ),
+        //select a section -time - of the parsed data
+        $title = $xml.find( "time" );
+        $( "#time" ).append( $title.text() );
+
+      });
+    }
+
     //setInterval(function(){ checkForAnswer(); }, 3000);
         </script>
 
@@ -77,6 +96,8 @@ error_reporting(-1);
       </tr>
         <tr>
           <td><button id = "button1" onclick="askquestion();">submit</button></td>
+          <td><button id = "button2" onclick="getTime();">Check Time</button></td>
+          <td><p id="time"></p></td>
         </tr>
       </table>
   </article>
