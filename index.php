@@ -34,12 +34,26 @@ error_reporting(-1);
           // if '0' is not returned (an answer has been supplied) output second message
                    if(data == '0'){
                      alert('no answer yet')
-                    }else {
-                       alert('got an answer!')
+                    }
+         else if (data == '1'){
+                       getAnswer();
+                   }
+                   else{
+                     alert('System confused')
                    }
           });
       }
 
+      function getAnswer(){
+
+   //Take question id and pass it to ajax.php to be used in a function
+            $.post( "ajax.php", { type: "giveanswer", id:currentId })
+            .done(function( data ) {
+            alert (data);
+
+        });
+
+}
     function askquestion(){
 
         //Take input name + question and set in variables
@@ -61,7 +75,7 @@ error_reporting(-1);
       //Using url generated from api website get data
       $.get("https://api.xmltime.com/timeservice?accesskey=68k4A001h3&expires=2016-04-07T21%3A32%3A31%2B00%3A00&signature=yBK%2BHU2IBGo7opSjiXGXlEy%2Bkac%3D&version=2&out=xml&placeid=norway%2Foslo",
       function( data ) {
-
+       alert('Hello')
         //convert the xml data to a string
         xml = new XMLSerializer().serializeToString(data.documentElement);
         //pass to the jquery parser to allow for selections to be made
@@ -70,12 +84,13 @@ error_reporting(-1);
         $xml = $( xmlDoc ),
         //select a section -time - of the parsed data
         $title = $xml.find( "time" );
+        alert($title.text())
         $( "#time" ).append( $title.text() );
 
       });
     }
 
-    //setInterval(function(){ checkForAnswer(); }, 3000);
+        //setInterval(function(){ checkForAnswer(); }, 10000);
         </script>
 
   </head>

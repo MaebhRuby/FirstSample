@@ -13,10 +13,15 @@ $type = $_POST['type'];
 if($type == 'submitquestion'){
     presentquestion();
 }
+else if($type == 'giveanswer'){
+
+    getAnswer();
+}
 else if($type == 'checkstatus'){
 
     checkQuestionStatus();
 }
+
 
 function checkQuestionStatus(){
 
@@ -41,6 +46,33 @@ function checkQuestionStatus(){
     $row = $q->fetch(PDO::FETCH_ASSOC);
 
     echo $row['status'];
+
+
+}
+
+function getAnswer(){
+
+    // database connection
+      try {
+        $host = '127.0.0.1';
+        $dbname = 'test';
+        $user = 'root';
+        $pass = '';
+        # MySQL with PDO_MYSQL
+        $DBH = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    } catch(PDOException $e) {echo $e;}
+
+    $id = $_POST['id'];
+
+
+    $q = $DBH->prepare("select answer from iwa2016 where id = :currentId");
+    $q->bindValue(':currentId',  $id);
+
+    $q->execute();
+
+    $row = $q->fetch(PDO::FETCH_ASSOC);
+
+    echo $row['answer'];
 
 
 }
