@@ -33,7 +33,7 @@ error_reporting(-1);
           //if '0' is returned (no answer has been issued) output this message to screen,
           // if '0' is not returned (an answer has been supplied) output second message
                    if(data == '0'){
-                     alert('no answer yet')
+                     alert('WAITING - No answer yet')
                     }
          else if (data == '1'){
                        getAnswer();
@@ -66,9 +66,10 @@ error_reporting(-1);
                 //save what is returned ('data') to a variable and post it to the screen
                 alert(data)
                 currentId = data;
-        });
-        //post the dialog of section somedialog to the screen
-          $( "#somedialog" ).dialog();
+
+            });
+            //post the dialog of section somedialog to the screen
+              $( "#somedialog" ).dialog();
     }
 
     function getTime(){
