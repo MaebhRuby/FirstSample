@@ -37,14 +37,14 @@ function checkQuestionStatus(){
 
     $id = $_POST['id'];
 
-
+    //Check the question status in the database
     $q = $DBH->prepare("select status from iwa2016 where id = :currentId");
     $q->bindValue(':currentId',  $id);
 
     $q->execute();
 
     $row = $q->fetch(PDO::FETCH_ASSOC);
-
+    //Return the status
     echo $row['status'];
 
 
@@ -64,15 +64,17 @@ function getAnswer(){
 
     $id = $_POST['id'];
 
-
+    //select the answer from the database for the current user
     $q = $DBH->prepare("select answer from iwa2016 where id = :currentId");
     $q->bindValue(':currentId',  $id);
 
     $q->execute();
 
     $row = $q->fetch(PDO::FETCH_ASSOC);
-
-    echo $row['answer'];
+    //save the answer to a variable
+    $answer = $row['answer'];
+    //Print the users answer to screen
+    echo "The answer to your question is:\n$answer";
 
 
 }
@@ -97,36 +99,11 @@ function presentquestion(){
     $q->bindValue(':name',  $name);
     $q->bindValue(':question',  $question);
 
-  //  $last_id = $DBH->lastInsertId();
     $q->execute();
 
     //  store the id of the current user & print to screen
     echo $DBH->lastInsertId();
 }
-
-
-//function submitquestion(){
-    //catching the variables
-  //  $question =  $_POST['app_question'];
-  //  $id   =  $_POST['app_id'];
-
-    // database connection
-    //  try {
-      //  $host = '127.0.0.1';
-      //  $dbname = 'test';
-      //  $user = 'root';
-      //  $pass = '';
-        # MySQL with PDO_MYSQL
-      //  $DBH = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-  //  } catch(PDOException $e) {echo $e;}
-
-  //  $q = $DBH->prepare("INSERT INTO `test`.`iwa2016` (`question`) VALUES (:question) WHERE `id`= (:userid);");
-  //  $q->bindValue(':question',  $question);
-  //  $q->bindValue(':userid',  $id);
-  //  $q->execute();
-
-//}
-
 
 
 ?>

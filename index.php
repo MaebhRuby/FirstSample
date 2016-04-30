@@ -14,24 +14,24 @@ error_reporting(-1);
 
       <title>Login Form</title>
       <!-- Links to connect and allow jquery be used in the code -->
-        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
           <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-            <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
             <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
-
+        //set variable to be used later for the users question ID
         var currentId = 0;
 
     function checkForAnswer(){
 
  //Take question id and pass it to ajax.php to be used in a function
+ //Take whatever is returned and pass it as 'data' to the function
           $.post( "ajax.php", { type: "checkstatus", id:currentId })
           .done(function( data ) {
 
           //if '0' is returned (no answer has been issued) output this message to screen,
-          // if '0' is not returned (an answer has been supplied) output second message
+          // if '1' is returned (an answer has been supplied) run the given function
                    if(data == '0'){
                      alert('WAITING - No answer yet')
                     }
@@ -68,15 +68,17 @@ error_reporting(-1);
                 currentId = data;
 
             });
-            //post the dialog of section somedialog to the screen
-              $( "#somedialog" ).dialog();
+            //post the dialog of div somedialog to the screen
+              $("#somedialog").dialog();
+              //Timer set to run the given function every 10 seconds
+              setInterval(function(){ checkForAnswer(); }, 10000);
+
     }
 
     function getTime(){
       //Using url generated from api website get data
       $.get("https://api.xmltime.com/timeservice?accesskey=68k4A001h3&expires=2016-04-07T21%3A32%3A31%2B00%3A00&signature=yBK%2BHU2IBGo7opSjiXGXlEy%2Bkac%3D&version=2&out=xml&placeid=norway%2Foslo",
       function( data ) {
-       alert('Hello')
         //convert the xml data to a string
         xml = new XMLSerializer().serializeToString(data.documentElement);
         //pass to the jquery parser to allow for selections to be made
@@ -91,7 +93,6 @@ error_reporting(-1);
       });
     }
 
-        //setInterval(function(){ checkForAnswer(); }, 10000);
         </script>
 
   </head>
@@ -103,6 +104,7 @@ error_reporting(-1);
     </header>
 
     <article>
+      <!-- table with input fields for the user and buttons to submit / call functions -->
       <table id = "questable">
         <tr>
           <td><span id = "nameboxtext"></span></td><td> <input type="text" name="app_name" id="app_name"></input></td>
@@ -118,19 +120,20 @@ error_reporting(-1);
       </table>
   </article>
 <script>
+   //styling the input boxes labels
     document.getElementById("nameboxtext").innerHTML = "1. Enter Your Name:";
         document.getElementById("nameboxtext").style.fontSize = "x-large";
         document.getElementById("questionbox").innerHTML = "2. What is your Question:";
             document.getElementById("questionbox").style.fontSize = "x-large";
     </script>
 
-  <section id="somedialog" title="Thank you">
+  <div id="somedialog" title="Thank you">
     <p>Thank you for your question! :) </p>
-  </section>
+  </div>
 
  <!--Hide the contents of div somedialog (it will be called on in a later function)-->
  <script>
-    $( "#somedialog" ).hide();
+    $("#somedialog").hide();
   </script>
 
   </div>
